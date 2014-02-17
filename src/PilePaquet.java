@@ -1,0 +1,10 @@
+
+public class PilePaquet {
+	
+	private Carte carte[];
+	
+	public PilePaquet(){
+		
+	}
+
+}

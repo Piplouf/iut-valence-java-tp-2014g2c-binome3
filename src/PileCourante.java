@@ -1,12 +1,12 @@
 /* TODO Javadoc ! */
 
-public class PileCourante {
+public class PileCourante extends Pile{
 	
 	private Carte carte[];
 
 	
-	public PileCourante(){
-		
+	public PileCourante(Carte[] carteVoulues){
+		super(carteVoulues);
 	}
 	
 }

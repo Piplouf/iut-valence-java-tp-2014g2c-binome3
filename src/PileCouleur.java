@@ -1,10 +1,8 @@
-/* TODO Javadoc ! */
 
-public class PileCouleur {
-
-	private Carte carte[];
+public class PileCouleur  extends Pile{
 	
-	public PileCouleur(){
-		carte[0] = null;
+	public PileCouleur(Carte[] carteVoulues){
+		super(carteVoulues);
 	}
+
 }

@@ -15,27 +15,24 @@ public class JeuDeCarte {
         }
     }
 
+    /**
+     * Méthode renvoyant une pile de carte 
+     * @param nombreCartesPile est le nombre de carte voulu dans la pile (doit être supérieur à 0 et inférieur au nombre de cartes restantes)
+     * @return un paquet de carte aléatoire
+     */
     public Carte[] distribuerCartePile(int nombreCartesPile) {
-        /* Prï¿½-condition sur la taille de la demande */
+        assert (nombreCartesPile > 0 && nombreCartesPile < this.nombreCartesRestantes);
 
-        Carte[] carteARetourner = new Carte[nombreCartesPile];
-        /* TODO Votre choix d'implÃ©mentation est (trÃ¨s) discutable. */
-        if (nombreCartesPile < 0 || nombreCartesPile <= this.nombreCartesRestantes) {
-
-        }
-        else {
+    	Carte[] carteARetourner = new Carte[nombreCartesPile];
             for (int i = 0; i < nombreCartesPile; i++) {
-                /* XXX Pourquoi 51 ? */
-                /* XXX Pourquoi 0+ ? */
-                int rand = 0 + (int) (Math.random() * ((51) + 1));
+                int rand = (int) (Math.random() * ((nombreCartesRestantes)));
                 carteARetourner[i] = this.carte[rand];
-                /* XXX Pourquoi i ? */
-                for (i = rand; i < nombreCartesRestantes; i++) {
-                    this.carte[rand] = this.carte[rand + 1];
+                for (int l = rand; l < nombreCartesRestantes-1; l++) {
+                    this.carte[l] = this.carte[l + 1];
                 }
                 this.nombreCartesRestantes--;
             }
-        }
+        
         return carteARetourner;
     }
 }

@@ -8,29 +8,47 @@ public class Partie {
 
     private Pile pileCourante[] = new Pile[7];
 
-    /* TODO Pourquoi un attribut. */
-    private JeuDeCarte jeuCourant = new JeuDeCarte();
-
     public Partie() {
-        /* TODO Pourquoi ? */
-        Carte[] carteVoulues;
+    	
+    	JeuDeCarte jeuADistribuer = new JeuDeCarte();
 
-        /* TODO Pourquoi des distributions de 0 cartes. */
-        for (int i = 0; i < 4; i++) {
-            this.pileCouleur[i] = new PileCouleur(this.jeuCourant.distribuerCartePile(0));
+        //Créer 4 piles vides
+    	for (int i = 0; i < 4; i++) {
+            this.pileCouleur[i] = new Pile(0,13);
         }
 
-        this.pilePaquet[0] = new PilePaquet(this.jeuCourant.distribuerCartePile(24));
-
+        //Boucle qui créer les piles courante contenant 1,2,3..7 cartes
         for (int i = 0; i < 7; i++) {
-            this.pileCourante[i] = new PileCourante(this.jeuCourant.distribuerCartePile(i + 1));
+            this.pileCourante[i] = new Pile(jeuADistribuer.distribuerCartePile(i + 1), i + 1 , 13 + (i + 1));
+            this.pileCourante[i].retournerDerniereCarte();
         }
-        /* TODO Normalement jeuCourant doit Ãªtre vide. */
+        
+        	// Créer une pile paquet de 24 cartes face cachées
+        this.pilePaquet[0] = new Pile(jeuADistribuer.distribuerCartePile(24),24,24);
+        
+        // Boucle qui retourne toutes les cartes du paquet
+        for(int i = 0; i < 24; i++){
+        	this.pilePaquet[0].retournerCarteVoulu(i);
+        }
+        
+        
     }
 
+    
+    public void jouer(){
+    	System.out.println(pilePaquet[0].afficherPile());
+    	for(int i = 0; i < 7; i++){
+    		System.out.println(pileCourante[i].afficherPile());
+    	}
+    	for(int i = 0; i < 4; i++){
+    		System.out.println(pileCouleur[i].afficherPile());
+    	}
+    	
+    }
+    
+    
     public void afficherEtatPartie() {
         /* TODO ??? */
-        System.out.println(this.pileCourante[0]);
     }
 
 

@@ -3,21 +3,16 @@
 public class Pile {
 
     private Carte[] carte;
-    
     private int taille;
-    
+    /* TODO Est-ce que cela change en cours de partie ? */
     private int capacite;
 
-    /**
-     * Créer une pile avec les cartes voulues 
-     * @param carte[]  carte voulues
-     */
-    
     public Pile(int taille, int capacite){
     	this.carte = new Carte[capacite];
     	this.taille = taille;
     }
-    
+
+    /* TODO Pourquoi le second paramÃ¨tre ? */
     public Pile(Carte[] cartesVoulu, int taille, int capacite) {
     	this.carte = new Carte[capacite];
         this.carte = cartesVoulu;
@@ -32,7 +27,8 @@ public class Pile {
     public void retournerCarteVoulu(int nombreCarteVoulu){
     	this.carte[nombreCarteVoulu].retournerCarte();
     }
-    
+
+    /* TODO Est-ce que le nom est bien choisi ? */
     public String afficherPile(){
     	String etatPaquet = "";
     	for(int i = 0; i < this.taille; i++)

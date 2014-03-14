@@ -1,11 +1,9 @@
 /* TODO Javadoc ! */
+/* TODO Package. */
 
 public class Carte {
-    /* TODO Peut changer en cours de partie ? */
     private final Couleur couleur;
-    /* TODO Peut changer en cours de partie ? */
     private final Numero  numero;
-    
 	private boolean etat;
     
 	public Numero getNumero() {
@@ -20,13 +18,16 @@ public class Carte {
 		return etat;
 	}
 
+    /* TODO Peut-être pourriez-vous faire un constructeur avec un état "false" par défaut ? */
 	public Carte(Couleur coul, Numero num, boolean etat) {
         this.couleur = coul;
         this.numero = num;
         this.etat = etat;
     }
-    
+
+    /* TODO Pourquoi mettre "Carte" c'est implicite par l'appartenance à la classe "Carte". */
     public void retournerCarte(){
+        /* TODO A simplifier !!! */
     	if(this.etat = true)
     		this.etat = false;
     	else

@@ -35,12 +35,8 @@ public class Pile {
     
     public String afficherPile(){
     	String etatPaquet = "";
-    	for(int i = 0; i < this.taille; i++){
-    		if(this.carte[i].isEtat())
-    			etatPaquet += "Carte cachée \n";
-    		else
-    			etatPaquet += "Numéro : " + this.carte[i].getNumero() + " Couleur : " + this.carte[i].getCouleur() + "\n";
-    	}
+    	for(int i = 0; i < this.taille; i++)
+            etatPaquet += this.carte[i].isEtat() ? "Carte cachÃ©e \n" : String.format("NumÃ©ro : %s Couleur : %s\n", this.carte[i].getNumero(), this.carte[i].getCouleur());
     	
     	return etatPaquet;
     }

@@ -1,7 +1,8 @@
 /* TODO Javadoc ! */
+/* TODO Package. */
 
 public class Pile {
-
+    /* TODO Change en cours de partie ? */
     private Carte[] carte;
     private int taille;
     /* TODO Est-ce que cela change en cours de partie ? */
@@ -14,6 +15,7 @@ public class Pile {
 
     /* TODO Pourquoi le second paramètre ? */
     public Pile(Carte[] cartesVoulu, int taille, int capacite) {
+        /* TODO Pourquoi cette première affectation ? */
     	this.carte = new Carte[capacite];
         this.carte = cartesVoulu;
         this.taille = taille;

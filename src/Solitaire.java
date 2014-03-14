@@ -1,4 +1,6 @@
 /* TODO Javadoc ! */
+/* TODO Package. */
+
 public class Solitaire {
 
 	public static void main(String[] args) {

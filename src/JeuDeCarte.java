@@ -3,7 +3,7 @@
 
 public class JeuDeCarte {
     /* TODO 52 : constante ? Calcul ? Change en cours de partie ? */
-    private Carte[] carte = new Carte[52];
+    private final Carte[] carte = new Carte[52];
 
     private int nombreCartesRestantes;
 
@@ -11,7 +11,7 @@ public class JeuDeCarte {
         nombreCartesRestantes = 0;
         for (Couleur coul : Couleur.values()) {
             for (Numero num : Numero.values()) {
-                carte[nombreCartesRestantes++] = new Carte(coul, num, false);
+                carte[nombreCartesRestantes++] = new Carte(coul, num, true);
             }
         }
     }

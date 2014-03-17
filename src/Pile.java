@@ -3,22 +3,24 @@
 
 public class Pile {
     /* TODO Change en cours de partie ? */
-    private Carte[] carte;
+    private final Carte[] carte;
+    
     private int taille;
-    /* TODO Est-ce que cela change en cours de partie ? */
-    private int capacite;
+
+    private final int capacite;
 
     public Pile(int taille, int capacite){
     	this.carte = new Carte[capacite];
     	this.taille = taille;
+    	this.capacite = capacite;
     }
 
     /* TODO Pourquoi le second param√®tre ? */
     public Pile(Carte[] cartesVoulu, int taille, int capacite) {
         /* TODO Pourquoi cette premi√®re affectation ? */
-    	this.carte = new Carte[capacite];
-        this.carte = cartesVoulu;
+    	this.carte =cartesVoulu;
         this.taille = taille;
+        this.capacite = capacite;
     }
     
     
@@ -31,11 +33,37 @@ public class Pile {
     }
 
     /* TODO Est-ce que le nom est bien choisi ? */
-    public String afficherPile(){
+    public String afficherPaquet(){
     	String etatPaquet = "";
     	for(int i = 0; i < this.taille; i++)
-            etatPaquet += this.carte[i].isEtat() ? "Carte cach√©e \n" : String.format("Num√©ro : %s Couleur : %s\n", this.carte[i].getNumero(), this.carte[i].getCouleur());
+            etatPaquet += this.carte[i].isEtat() ? "Carte cachÈe \n" : String.format("NumÈro : %s Couleur : %s\n", this.carte[i].getNumero(), this.carte[i].getCouleur());
     	
     	return etatPaquet;
+    }
+    
+    /**
+     * MÈthode pour dÈplacer les cartes d'une pile ‡ une autre
+     * @param pile
+     */
+    
+    public void deplacerCarte(Pile pile){
+    	Carte[] carteADeplacer = new Carte[30];
+    	int i = 0, indice = 0;
+    	
+    	while(!(this.carte[i].isEtat())){
+    		i++;
+    	}
+    	
+    	for(int j = i; j < this.taille;j++){
+    		carteADeplacer[indice++] = this.carte[j];
+    	}
+    	
+    	for(int j = 0; j < indice - 1; j++)
+    	{
+    		pile.carte[pile.taille++] = carteADeplacer[j];
+    		this.taille--;
+    	}
+    	
+    	
     }
 }

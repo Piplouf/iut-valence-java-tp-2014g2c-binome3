@@ -3,7 +3,9 @@
 
 public class Carte {
     private final Couleur couleur;
+    
     private final Numero  numero;
+    
 	private boolean etat;
     
 	public Numero getNumero() {
@@ -27,10 +29,7 @@ public class Carte {
 
     /* TODO Pourquoi mettre "Carte" c'est implicite par l'appartenance à la classe "Carte". */
     public void retournerCarte(){
-        /* TODO A simplifier !!! */
-    	if(this.etat = true)
-    		this.etat = false;
-    	else
-    		this.etat = true;
+    	this.etat = !(this.etat); 
     }
+  
 }

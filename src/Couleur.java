@@ -1,6 +1,11 @@
-/* TODO Javadoc ! */
 /* TODO Package. */
 
+/**
+ * TODO.
+ *
+ * @author TODO
+ * @version TODO
+ */
 public enum Couleur {
-	CARREAU,PIQUE,TREFLE,COEUR;
+    CARREAU, PIQUE, TREFLE, COEUR
 }

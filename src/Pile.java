@@ -1,66 +1,69 @@
-/* TODO Javadoc ! */
 /* TODO Package. */
 
+/**
+ * TODO.
+ *
+ * @author TODO
+ * @version TODO
+ */
 public class Pile {
-    /* TODO Change en cours de partie ? */
-    private final Carte[] carte;
-    
+    /** TODO. */
+    private final Carte[] cartes;
+    /** TODO. */
     private int taille;
-
+    /* TODO Redondant avec cartes.length, non ? */
+    /** TODO. */
     private final int capacite;
 
-    public Pile(int taille, int capacite){
-    	this.carte = new Carte[capacite];
-    	this.taille = taille;
-    	this.capacite = capacite;
+    public Pile(int taille, int capacite) {
+        this.cartes = new Carte[capacite];
+        this.taille = taille;
+        this.capacite = capacite;
     }
 
     /* TODO Pourquoi le second param√®tre ? */
     public Pile(Carte[] cartesVoulu, int taille, int capacite) {
-        /* TODO Pourquoi cette premi√®re affectation ? */
-    	this.carte =cartesVoulu;
+    	this.cartes =cartesVoulu;
         this.taille = taille;
         this.capacite = capacite;
     }
     
-    
-    public void retournerDerniereCarte(){
-    	this.carte[this.taille - 1].retournerCarte();
+    public void retournerDerniereCarte() {
+    	this.cartes[this.taille - 1].retournerCarte();
     }
     
-    public void retournerCarteVoulu(int nombreCarteVoulu){
-    	this.carte[nombreCarteVoulu].retournerCarte();
+    public void retournerCarteVoulu(int nombreCarteVoulu) {
+    	this.cartes[nombreCarteVoulu].retournerCarte();
     }
 
+    /* TODO Utilisez un StringBuilder. */
     /* TODO Est-ce que le nom est bien choisi ? */
     public String afficherPaquet(){
     	String etatPaquet = "";
     	for(int i = 0; i < this.taille; i++)
-            etatPaquet += this.carte[i].isEtat() ? "Carte cachÈe \n" : String.format("NumÈro : %s Couleur : %s\n", this.carte[i].getNumero(), this.carte[i].getCouleur());
+            etatPaquet += this.cartes[i].isEtat() ? "Carte cach√©e.%n" : String.format("Num√©ro : %s Couleur : %s.%n", this.cartes[i].getNumero(), this.cartes[i].getCouleur());
     	
     	return etatPaquet;
     }
-    
-    /**
-     * MÈthode pour dÈplacer les cartes d'une pile ‡ une autre
-     * @param pile
-     */
-    
+
+    /* TODO √Ä discuter en TP. */
+    /** M√©thode pour d√©placer les cartes d'une pile √† une autre. */
     public void deplacerCarte(Pile pile){
-    	Carte[] carteADeplacer = new Carte[30];
-    	int i = 0, indice = 0;
-    	
-    	while(!(this.carte[i].isEtat())){
+        int i = 0;
+
+        while(!this.cartes[i].isEtat()){
     		i++;
     	}
-    	
-    	for(int j = i; j < this.taille;j++){
-    		carteADeplacer[indice++] = this.carte[j];
+
+        Carte[] carteADeplacer = new Carte[30];
+        int indice = 0;
+        for(int j = i; j < this.taille;j++){
+    		carteADeplacer[indice++] = this.cartes[j];
     	}
     	
-    	for(int j = 0; j < indice - 1; j++)
+    	for(int j = 0; j < (indice - 1); j++)
     	{
-    		pile.carte[pile.taille++] = carteADeplacer[j];
+    		pile.cartes[pile.taille++] = carteADeplacer[j];
     		this.taille--;
     	}
     	

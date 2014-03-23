@@ -1,15 +1,14 @@
-/* TODO Javadoc ! */
 /* TODO Package. */
 
 /**
  * Classe principale qui lance le jeu
- * @author maruejof
  *
+ * @author TODO
+ * @version TODO
  */
 public class Solitaire {
-
-	public static void main(String[] args) {
-		Partie partie = new Partie();
-		partie.jouer();
-	}
+    public static void main(String[] args) {
+        Partie partie = new Partie();
+        partie.jouer();
+    }
 }

@@ -1,24 +1,30 @@
-/* TODO Javadoc ! */
 /* TODO Package. */
 
+/**
+ * TODO.
+ *
+ * @author TODO
+ * @version TODO
+ */
 public class Carte {
+    /** TODO. */
     private final Couleur couleur;
-    
+    /** TODO. */
     private final Numero  numero;
-    
-	private boolean etat;
-    
-	public Numero getNumero() {
-		return numero;
-	}
-	
+    /** TODO. */
+    private boolean etat;
+
+    public Numero getNumero() {
+        return numero;
+    }
+
     public Couleur getCouleur() {
-		return couleur;
-	}
+        return couleur;
+    }
 
     public boolean isEtat() {
-		return etat;
-	}
+        return etat;
+    }
 
     /* TODO Peut-être pourriez-vous faire un constructeur avec un état "false" par défaut ? */
 	public Carte(Couleur coul, Numero num, boolean etat) {
@@ -31,5 +37,5 @@ public class Carte {
     public void retournerCarte(){
     	this.etat = !(this.etat); 
     }
-  
+
 }

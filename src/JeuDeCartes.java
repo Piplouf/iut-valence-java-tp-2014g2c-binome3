@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 /* TODO Package. */
 
 /**
@@ -6,20 +8,21 @@
  * @author TODO
  * @version TODO
  */
-public class JeuDeCarte {
+public class JeuDeCartes {
 
     /* TODO 52 : constante ? Calcul ? */
     /** TODO. */
-    private final Carte[] cartes = new Carte[52];
+    private final Stack<Carte> cartes = new Stack<Carte>();
     /** TODO. */
     private int nombreCartesRestantes;
 
     /** TODO. */
-    public JeuDeCarte() {
+    public JeuDeCartes() {
         nombreCartesRestantes = 0;
         for (Couleur coul : Couleur.values()) {
             for (Numero num : Numero.values()) {
-                cartes[nombreCartesRestantes++] = new Carte(coul, num, true);
+                this.cartes.push(new Carte(coul,num,true));
+                nombreCartesRestantes++;
             }
         }
     }
@@ -37,10 +40,8 @@ public class JeuDeCarte {
             for (int i = 0; i < nombre; i++) {
                 /* TODO Préférer SecureRadom à Random. */
                 int rand = (int) (Math.random() * nombreCartesRestantes);
-                carteARetourner[i] = this.cartes[rand];
-                for (int r = rand; r < (nombreCartesRestantes - 1); r++) {
-                    this.cartes[r] = this.cartes[r + 1];
-                }
+                carteARetourner[i] = this.cartes.get(rand);
+                this.cartes.remove(rand);
                 this.nombreCartesRestantes--;
             }
         

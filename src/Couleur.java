@@ -7,5 +7,17 @@
  * @version TODO
  */
 public enum Couleur {
-    CARREAU, PIQUE, TREFLE, COEUR
+    CARREAU(FamilleCouleur.ROUGE), PIQUE(FamilleCouleur.NOIR), TREFLE(FamilleCouleur.NOIR), COEUR(FamilleCouleur.ROUGE);
+    
+    private final FamilleCouleur familleDeCouleur;
+    
+    private Couleur(FamilleCouleur familleDeCouleur)
+    {
+    	this.familleDeCouleur = familleDeCouleur;
+    }
+    
+    public FamilleCouleur obtenirFamilleDeCouleur()
+    {
+    	return this.familleDeCouleur;
+    }
 }

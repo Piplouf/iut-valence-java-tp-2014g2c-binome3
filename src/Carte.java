@@ -12,30 +12,55 @@ public class Carte {
     /** TODO. */
     private final Numero  numero;
     /** TODO. */
-    private boolean etat;
+    private boolean estFaceCachee;
 
-    public Numero getNumero() {
+    
+    /* TODO Peut-être pourriez-vous faire un constructeur avec un état "false" par défaut ? */
+  	public Carte(Couleur coul, Numero num, boolean etat) {
+          this.couleur = coul;
+          this.numero = num;
+          this.estFaceCachee = etat;
+      }
+  	
+    public Numero numero() {
         return numero;
     }
 
-    public Couleur getCouleur() {
+    public Couleur couleur() {
         return couleur;
     }
 
-    public boolean isEtat() {
-        return etat;
+    public boolean estFaceCachee() {
+        return estFaceCachee;
     }
 
-    /* TODO Peut-être pourriez-vous faire un constructeur avec un état "false" par défaut ? */
-	public Carte(Couleur coul, Numero num, boolean etat) {
-        this.couleur = coul;
-        this.numero = num;
-        this.etat = etat;
+  
+
+    public void retourner(){
+    	this.estFaceCachee = !(this.estFaceCachee); 
+    }
+    
+    public boolean estDeFamilleDeCouleurDifferente(Carte carte){
+		
+    	return !(this.couleur.obtenirFamilleDeCouleur().equals(carte.couleur.obtenirFamilleDeCouleur()));
     }
 
-    /* TODO Pourquoi mettre "Carte" c'est implicite par l'appartenance à la classe "Carte". */
-    public void retournerCarte(){
-    	this.etat = !(this.etat); 
-    }
+	public boolean estDeNumeroSuivant(Carte carte) {
+		if(this.numero.obtenirNumeroSuivant() == carte.numero)
+			return true;
+		
+		return false;
+	}
+	
+	public boolean estDeNumeroPrecedent(Carte carte) {
+		if(this.numero.obtenirNumeroPrecedent() == carte.numero)
+			return true;
+		return false;
+	}
+	
+	public String toString() {
+		return estFaceCachee() ? "Carte cach�e.\n" 
+				: String.format("Num�ro : %s Couleur : %s.\n", numero, couleur);
+	}
 
 }

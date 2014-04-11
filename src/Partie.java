@@ -43,8 +43,19 @@ public class Partie {
 	}
 
 	public void jouer() {
+		
+		Scanner sc = new Scanner(System.in);
+		
 		this.afficherEtatPartie();
+		int choixAction;
 		while (true) {
+			do {
+				System.out.println("1. Déplacer pile à pile\n2. Utiliser la pioche");
+				choixAction = sc.nextInt();
+			} while (choixAction != 1 && choixAction != 2);
+
+		switch(choixAction){	
+		case 1:{
 			System.out.println("Entrer la pile à déplacer !");
 			Pile pileDepart = this.choixPile();
 			System.out.println("Entrer la pile d'arrivée !");
@@ -52,18 +63,27 @@ public class Partie {
 			/* Verifier la semantique du choix. */
 			pileDepart.deplacerCarte(pileArrivee);
 			this.afficherEtatPartie();
+			break;}
+			
+		case 2:{
+			System.out.println("Entrer la pile de destination");
+			Pile pileArrivee = this.choixPile();
+			System.out.println("Entrer la carte à déplacer");
+			this.pioche.deplacerCarte(choixCarte(),pileArrivee);
+			}
+		}
 		}
 	}
 
 	public void afficherEtatPartie() {
-		System.out.println(pioche.afficherEtatPartie());
+		System.out.println(pioche.toString());
 		for (int i = 0; i < NOMBRE_DE_PILES_TEMPORAIRES; i++) {
 			System.out.println("Pile courante n°" + (i + 1));
-			System.out.println(temporaires[i].afficherEtatPartie());
+			System.out.println(temporaires[i].toString());
 		}
 		for (int i = 0; i < NOMBRE_DE_COULEURS; i++) {
 			System.out.println("Pile de couleur n°" + (i + 1));
-			System.out.println(couleurs[i].afficherEtatPartie());
+			System.out.println(couleurs[i].toString());
 		}
 	}
 
@@ -88,5 +108,11 @@ public class Partie {
 		}
 		}
 		return new Pile();
+	}
+	
+	public Carte choixCarte(){
+		Scanner sc = new Scanner(System.in);		
+		int choixCarte = sc.nextInt();
+		return this.pioche.cartes.get(choixCarte - 1);
 	}
 }

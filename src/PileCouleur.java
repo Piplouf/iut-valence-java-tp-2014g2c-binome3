@@ -7,55 +7,37 @@ public class PileCouleur extends Pile{
 		super();
 	}
 	
-    
-	public void deplacerCarte(Pile pile){
-		  
-        Stack<Carte> cartesAStockes = new Stack<Carte>();
-    	
-        if(!(this.cartes.isEmpty()))
-        	if(deplacementEstPossible(pile)){
-    	//Stock les cartes à déplacer dans une pile intermediaire
-        for(int i = 0; i < this.cartes.size(); i++){
-    		if(!(this.cartes.get(i).estFaceCachee()))
-    			cartesAStockes.push(this.cartes.pop());
-    	}
-        if(!(this.cartes.isEmpty()))
-        	this.cartes.peek().retourner();
-        
-        for(int i = 0; i<cartesAStockes.size();i++)
-        	pile.cartes.push(cartesAStockes.pop());
-        }
-	}
-	
-	private boolean deplacementEstPossible(Pile pile){
-    	if(!couleurEstDifferente(pile) && carteEstLaSuivante(pile))
+	@Override
+	protected boolean deplacementEstPossible(Pile pile){
+    	if(couleurEstIdentique(pile) && carteEstLaSuivante(pile))
     		return true;
     	return false;
     }
+ 
     
-    private boolean couleurEstDifferente(Pile pile){
+    private boolean couleurEstIdentique(Pile pile) {
     	Carte carteAVerifier = null;
-    	for(int i = 0; i < this.cartes.size();i++)
-    		if(!(this.cartes.get(i).estFaceCachee()))
-    			carteAVerifier = this.cartes.get(i);
-    	if(!this.cartes.isEmpty())
-    		if(!carteAVerifier.estDeFamilleDeCouleurDifferente(pile.cartes.peek()))
-    			return true;
-    	else
-    		return false;
-    	return false;
-    }
-    
-    private boolean carteEstLaSuivante(Pile pile) {
+		for (int i = 0; i < this.cartes.size(); i++)
+			if (!(this.cartes.get(i).estFaceCachee()))
+				carteAVerifier = this.cartes.get(i);
+		if (!pile.cartes.isEmpty() && carteAVerifier != null)
+			if (carteAVerifier.estDeCouleurIdentique(pile.cartes.peek()))
+				return true;
+		if(carteAVerifier == null && pile.cartes.peek().numero() == Numero.AS)
+			return true;
+		return false;
+	}
+
+	private boolean carteEstLaSuivante(Pile pile) {
 		Carte carteAVerifier = null;
 		for (int i = 0; i < this.cartes.size(); i++)
 			if (!(this.cartes.get(i).estFaceCachee()))
 				carteAVerifier = this.cartes.get(i);
-		if (!pile.cartes.isEmpty())
+		if (!pile.cartes.isEmpty() && carteAVerifier != null)
 			if (carteAVerifier.estDeNumeroPrecedent(pile.cartes.peek()))
 				return true;
-			else if (carteAVerifier.numero() == Numero.AS)
-				return true;
+		if(carteAVerifier == null && pile.cartes.peek().numero() == Numero.AS)
+			return true;
 		return false;
 	}
 

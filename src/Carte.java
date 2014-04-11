@@ -44,16 +44,20 @@ public class Carte {
 		
     	return !(this.couleur.obtenirFamilleDeCouleur().equals(carte.couleur.obtenirFamilleDeCouleur()));
     }
+    
+    public boolean estDeCouleurIdentique(Carte carte){
+    	return (this.couleur == carte.couleur);
+    }
 
 	public boolean estDeNumeroSuivant(Carte carte) {
-		if(this.numero.obtenirNumeroSuivant() == carte.numero)
+		if(this.numero == carte.numero.obtenirNumeroSuivant())
 			return true;
 		
 		return false;
 	}
 	
 	public boolean estDeNumeroPrecedent(Carte carte) {
-		if(this.numero.obtenirNumeroPrecedent() == carte.numero)
+		if(this.numero == carte.numero.obtenirNumeroPrecedent())
 			return true;
 		return false;
 	}

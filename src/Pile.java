@@ -29,40 +29,38 @@ public class Pile {
 		this.cartes.peek().retourner();
 	}
 
+	/**
+	 * Retourne toutes les cartes d'une pile de carte
+	 */
 	public void retournerToutesLesCartes() {
 		for (Carte carte : cartes) {
 			carte.retourner();
 		}
 	}
 
-	/**
-	 * Change l'�tat de la carte voulue
-	 * 
-	 * @param nombreCarteVoulu
-	 *            carte voulue
-	 */
-
-	/* TODO Utilisez un StringBuilder. */
-	/* TODO Est-ce que le nom est bien choisi ? */
-	public String afficherEtatPartie() {
+	@Override
+	public String toString() {
 		String etatPaquet = "";
+		int compteur = 1;
 		for (Carte carte : cartes) {
+			etatPaquet += compteur+". ";
 			etatPaquet += carte.toString();
+			compteur++;
 		}
 		return etatPaquet;
 	}
 
-	/* TODO À discuter en TP. */
 	/** Méthode pour déplacer les cartes d'une pile à une autre. */
 	public void deplacerCarte(Pile pile) {
 		if (!(this.cartes.isEmpty()))
 			if (pile.deplacementEstPossible(this)) {
 				Stack<Carte> cartesAStockes = new Stack<Carte>();
-				for (Carte carte : pile.cartes) {
-					if (carte.estFaceCachee()) {
-						return;
+				for (int i =0; i < this.cartes.size();i++) {
+					if (this.cartes.get(i).estFaceCachee()) { 
+						
 					}
-					cartesAStockes.push(this.cartes.pop());
+					else
+						cartesAStockes.push(this.cartes.pop());
 				}
 				if (!(this.cartes.isEmpty()))
 					this.cartes.peek().retourner();
@@ -72,23 +70,36 @@ public class Pile {
 				}
 			}
 	}
-
-	private boolean deplacementEstPossible(Pile pile) {
-		if (couleurEstDifferente(pile) && carteEstLaPrecedente(pile))
-				return true;
-		return false;
+	
+	public void deplacerCarte(Carte carte, Pile pileArrivee) {
+		
+		if(!pileArrivee.cartes.isEmpty()){
+			if(carte.estDeNumeroSuivant(pileArrivee.cartes.peek()) &&
+				carte.estDeFamilleDeCouleurDifferente(pileArrivee.cartes.peek())){
+				pileArrivee.cartes.push(carte);
+				this.cartes.removeElement(carte);
+			}
+		}
+		if(pileArrivee.cartes.isEmpty() && carte.numero() == Numero.ROI){
+				pileArrivee.cartes.push(carte);
+				this.cartes.removeElement(carte);
+		}
 	}
 
-	private boolean couleurEstDifferente(Pile pile) {
+	protected boolean deplacementEstPossible(Pile pile) {
+		return (couleurEstDifferente(pile) && carteEstLaPrecedente(pile));
+	}
+
+	protected boolean couleurEstDifferente(Pile pile) {
 		Carte carteAVerifier = null;
 		for (int i = 0; i < this.cartes.size(); i++)
 			if (!(this.cartes.get(i).estFaceCachee()))
 				carteAVerifier = this.cartes.get(i);
-		if (!pile.cartes.isEmpty())
+		if (!pile.cartes.isEmpty() && carteAVerifier != null)
 			if (carteAVerifier.estDeFamilleDeCouleurDifferente(pile.cartes.peek()))
 				return true;
-			else
-				return false;
+		if(carteAVerifier == null && pile.cartes.peek().numero() == Numero.ROI)
+			return true;
 		return false;
 	}
 
@@ -97,11 +108,11 @@ public class Pile {
 		for (int i = 0; i < this.cartes.size(); i++)
 			if (!(this.cartes.get(i).estFaceCachee()))
 				carteAVerifier = this.cartes.get(i);
-		if (!pile.cartes.isEmpty())
+		if (!pile.cartes.isEmpty() && carteAVerifier != null)
 			if (carteAVerifier.estDeNumeroSuivant(pile.cartes.peek()))
 				return true;
-			else
-				return true;
+		if(carteAVerifier == null && pile.cartes.peek().numero() == Numero.ROI)
+			return true;
 		return false;
 	}
 

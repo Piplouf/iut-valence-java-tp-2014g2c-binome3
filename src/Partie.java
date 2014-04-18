@@ -9,8 +9,18 @@ import java.util.Scanner;
  * @version TODO
  */
 public class Partie {
+	
+	/**
+	 * Constante qui définit le nombre de cartes contenus dans la pioche au depart
+	 */
 	private static final int NOMBRE_DE_CARTES_DE_LA_PIOCHE = 24;
+	/**
+	 * Constante qui définit le nombre de piles courantes dans une partie
+	 */
 	private static final int NOMBRE_DE_PILES_TEMPORAIRES = 7;
+	/**
+	 * Constante qui définit le nombre de piles finales dans une partie
+	 */
 	private static final int NOMBRE_DE_COULEURS = 4;
 	/** Piles contenant les cartes dÃ©finitives. */
 	private PileCouleur[] couleurs;
@@ -19,6 +29,10 @@ public class Partie {
 	/** TODO. */
 	private Pile[] temporaires;
 
+	/**
+	 * Créer une partie avec 7 piles courantes, 4 piles finales et une pioche toute
+	 * initialisé avec le nombre exact de cartes selon les régles du solitaire
+	 */
 	public Partie() {
 		this.couleurs = new PileCouleur[NOMBRE_DE_COULEURS];
 		this.temporaires = new Pile[NOMBRE_DE_PILES_TEMPORAIRES];
@@ -42,13 +56,17 @@ public class Partie {
 		this.pioche.retournerToutesLesCartes();
 	}
 
+	/**
+	 * Méthode qui gére la gestion d'une partie, en prenant en compte
+	 * les entrée claviers du joueurs
+	 */
 	public void jouer() {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		this.afficherEtatPartie();
 		int choixAction;
 		while (true) {
+			this.afficherEtatPartie();
 			do {
 				System.out.println("1. Déplacer pile à pile\n2. Utiliser la pioche");
 				choixAction = sc.nextInt();
@@ -60,21 +78,25 @@ public class Partie {
 			Pile pileDepart = this.choixPile();
 			System.out.println("Entrer la pile d'arrivée !");
 			Pile pileArrivee = this.choixPile();
-			/* Verifier la semantique du choix. */
 			pileDepart.deplacerCarte(pileArrivee);
 			this.afficherEtatPartie();
-			break;}
+			break;
+			}
 			
 		case 2:{
 			System.out.println("Entrer la pile de destination");
 			Pile pileArrivee = this.choixPile();
 			System.out.println("Entrer la carte à déplacer");
 			this.pioche.deplacerCarte(choixCarte(),pileArrivee);
+			break;
 			}
 		}
 		}
 	}
 
+	/**
+	 * Affiche l'etat de la partie, en affichant toutes les piles et leurs contenus
+	 */
 	public void afficherEtatPartie() {
 		System.out.println(pioche.toString());
 		for (int i = 0; i < NOMBRE_DE_PILES_TEMPORAIRES; i++) {
@@ -87,6 +109,11 @@ public class Partie {
 		}
 	}
 
+	/**
+	 * Méthode qui demande les entrées claviers à l'utilisateur pour le deplacement des 
+	 * piles
+	 * @return la pile selectionner
+	 */
 	public Pile choixPile() {
 		int choixPile;
 		Scanner sc = new Scanner(System.in);
@@ -110,6 +137,11 @@ public class Partie {
 		return new Pile();
 	}
 	
+	/**
+	 * Méthode qui permet de choisir une carte parmi celle de la pioche pour 
+	 * pouvoir la déplacer ensuite
+	 * @return la carte choisie
+	 */
 	public Carte choixCarte(){
 		Scanner sc = new Scanner(System.in);		
 		int choixCarte = sc.nextInt();

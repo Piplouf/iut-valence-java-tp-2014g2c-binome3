@@ -1,6 +1,5 @@
 import java.util.Arrays;
 import java.util.Stack;
-import java.util.Iterator;
 
 /* TODO Package. */
 
@@ -11,12 +10,23 @@ import java.util.Iterator;
  * @version 1.1
  */
 public class Pile {
+	
+	/**
+	 * Les cartes composants une pile
+	 */
 	protected final Stack<Carte> cartes;
 
+	/**
+	 * Crée une pile vide ne contenant aucune carte
+	 */
 	public Pile() {
 		cartes = new Stack<Carte>();
 	}
 
+	/**
+	 * Constructeur créant une pile avec les cartes désirés
+	 * @param cartesVoulu cartes qui composeront la pile
+	 */
 	public Pile(Carte[] cartesVoulu) {
 		cartes = new Stack<Carte>();
 		cartes.addAll(Arrays.asList(cartesVoulu));
@@ -43,15 +53,21 @@ public class Pile {
 		String etatPaquet = "";
 		int compteur = 1;
 		for (Carte carte : cartes) {
-			etatPaquet += compteur+". ";
+			etatPaquet += compteur + ". ";
 			etatPaquet += carte.toString();
 			compteur++;
 		}
 		return etatPaquet;
 	}
 
-	/** MÃ©thode pour dÃ©placer les cartes d'une pile Ã  une autre. */
-	public void deplacerCarte(Pile pile) {
+	/**
+	 * Methode qui deplacer une carte d'une pile à une autre
+	 * @param pile sur laquelle on veut deplacer notre carte
+	 * @return true si le deplacement est reussi
+	 *
+	 */
+	public boolean deplacerCarte(Pile pile) {
+		boolean AMarche = false;
 		if (!(this.cartes.isEmpty()))
 			if (pile.deplacementEstPossible(this)) {
 				Stack<Carte> cartesAStockes = new Stack<Carte>();
@@ -68,11 +84,19 @@ public class Pile {
 				for (Carte carte : cartesAStockes) {
 					pile.cartes.push(carte);
 				}
+			AMarche = true;
 			}
+		return AMarche;
 	}
 	
+	/**
+	 * Méthode qui deplace une carte de la pioche sur une autre pile du jeu
+	 * @param carte carte que l'on veut déplacer
+	 * @param pileArrivee pile sur laquelle on veut deplacer la carte
+	 */
 	public void deplacerCarte(Carte carte, Pile pileArrivee) {
 		
+		/*
 		if(!pileArrivee.cartes.isEmpty()){
 			if(carte.estDeNumeroSuivant(pileArrivee.cartes.peek()) &&
 				carte.estDeFamilleDeCouleurDifferente(pileArrivee.cartes.peek())){
@@ -84,12 +108,28 @@ public class Pile {
 				pileArrivee.cartes.push(carte);
 				this.cartes.removeElement(carte);
 		}
+		*/
+		
+		Pile transition = new Pile();
+		transition.cartes.add(carte);
+		if(transition.deplacerCarte(pileArrivee))
+			this.cartes.remove(carte);
 	}
 
+	/**
+	 * Renvoi un booléen pour savoir si le deplacement est possible
+	 * @param pile pile d'arrivée du deplacement
+	 * @return true si le deplacement est possible
+	 */
 	protected boolean deplacementEstPossible(Pile pile) {
 		return (couleurEstDifferente(pile) && carteEstLaPrecedente(pile));
 	}
 
+	/**
+	 * Verifie si les cartes sont de types de couleurs differentes
+	 * @param pile pile sur laquelle on veut déplacer la carte
+	 * @return true si les cartes sont de couleurs differentes
+	 */
 	protected boolean couleurEstDifferente(Pile pile) {
 		Carte carteAVerifier = null;
 		for (int i = 0; i < this.cartes.size(); i++)
@@ -103,6 +143,11 @@ public class Pile {
 		return false;
 	}
 
+	/**
+	 * Verifie si la carte au sommet de la pile est la precedente de la pile d'arrivee
+	 * @param pile pile sur laquelle on veut deplacer notre carte
+	 * @return true si c'est la carte précédente
+	 */
 	private boolean carteEstLaPrecedente(Pile pile) {
 		Carte carteAVerifier = null;
 		for (int i = 0; i < this.cartes.size(); i++)

@@ -10,13 +10,14 @@ import java.util.Stack;
  */
 public class JeuDeCartes {
 
-    /* TODO 52 : constante ? Calcul ? */
-    /** TODO. */
+    /** Pile contenant toutes les cartes du jeu de carte */
     private final Stack<Carte> cartes = new Stack<Carte>();
-    /** TODO. */
+    /** Le nombre de cartes restant � notre jeu de cartes */
     private int nombreCartesRestantes;
 
-    /** TODO. */
+    /** Cr�er un jeu de carte contenant toutes les cartes possible
+     * sans doublons
+    */
     public JeuDeCartes() {
         nombreCartesRestantes = 0;
         for (Couleur coul : Couleur.values()) {
@@ -28,8 +29,7 @@ public class JeuDeCartes {
     }
 
     /**
-     * Méthode renvoyant une pile de carte.
-     *
+     * Méthode permettant de distribuer des cartes de leurs piles
      * @param nombre Nombre de carte voulu dans la pile (doit être supérieur à 0 et inférieur au nombre de cartes restantes)
      * @return Un paquet de carte aléatoire
      */
